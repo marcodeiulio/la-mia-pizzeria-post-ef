@@ -4,7 +4,7 @@
 
 }
 
-@model la_mia_pizzeria_static.Models.PizzasList
+@model la_mia_pizzeria_static.Models.PizzeriaContext
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
 					</thead>
 					<tbody>
 						@{
-							foreach (var item in Model.pizzas)
+							foreach (var item in Model.Pizza)
 							{
 								<tr>
 									<td>
