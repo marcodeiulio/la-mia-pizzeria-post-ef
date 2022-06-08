@@ -1,6 +1,6 @@
 using la_mia_pizzeria_static.Models;
 
-public static PizzeriaContext db = new PizzeriaContext();
+//public static PizzeriaContext db = new PizzeriaContext();
 
 var builder = WebApplication.CreateBuilder(args);
 

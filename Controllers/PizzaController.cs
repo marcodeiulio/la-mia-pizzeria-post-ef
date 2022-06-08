@@ -17,15 +17,17 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class PizzaController : Controller
     {
+
+        public static PizzeriaContext db = new PizzeriaContext();
         public static PizzasList pizze;
         public IActionResult Index()
         {
-            Pizza Fornarina = new Pizza(0,"Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
-            Pizza Ciociara = new Pizza(1,"Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
-            Pizza Vegetariana = new Pizza(2,"Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
-            Pizza Romana = new Pizza(3,"Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
-            Pizza Sorrentina = new Pizza(4,"Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
-            Pizza BellaNapoli = new Pizza(5,"Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
+            Pizza Fornarina = new Pizza("Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
+            Pizza Ciociara = new Pizza("Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
+            Pizza Vegetariana = new Pizza("Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
+            Pizza Romana = new Pizza("Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
+            Pizza Sorrentina = new Pizza("Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
+            Pizza BellaNapoli = new Pizza("Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
 
             pizze = new();
             pizze.pizzas.Add(Fornarina);
@@ -35,7 +37,15 @@ namespace la_mia_pizzeria_static.Controllers
             pizze.pizzas.Add(Sorrentina);
             pizze.pizzas.Add(BellaNapoli);
 
-            return View(pizze);
+            //db.Add(Fornarina);
+            //db.Add(Ciociara);
+            //db.Add(Vegetariana);
+            //db.Add(Romana);
+            //db.Add(Sorrentina);
+            //db.Add(BellaNapoli);
+            //db.SaveChanges();
+
+            return View(db);
         }
 
 
@@ -47,7 +57,6 @@ namespace la_mia_pizzeria_static.Controllers
         {
             Pizza NuovaPizza = new Pizza
             {
-                Id = pizze.pizzas.Count + 1,
                 Name = "",
                 Description = "",
                 Price = 0.0,

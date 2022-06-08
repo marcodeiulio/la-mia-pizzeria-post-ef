@@ -17,6 +17,7 @@ namespace la_mia_pizzeria_static.Models
     [Table("pizza")]
     public class Pizza
     {
+        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Il nome della pizza è obbligatorio")]
         public string Name { get; set; }
@@ -26,9 +27,8 @@ namespace la_mia_pizzeria_static.Models
         public double Price { get; set; }
         public string? Photo { get; set; }
 
-        public Pizza(int id, string Nome, string Descizione, double Prezzo, string Foto)
+        public Pizza(string Nome, string Descizione, double Prezzo, string Foto)
         {
-            this.Id = id;
             this.Name = Nome;
             this.Description = Descizione;
             this.Price = Prezzo;
