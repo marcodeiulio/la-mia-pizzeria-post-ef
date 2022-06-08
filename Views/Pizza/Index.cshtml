@@ -40,7 +40,7 @@
 										<h3><a href="@Url.Action("Show", "Pizza", new {@item.Id})">@item.Name</a></h3>
 										<div>
 											<a class="btn-warning btn d-inline" href="@Url.Action("AggiornaPizza", "Pizza", @item)">Aggiorna</a>
-											<a class="btn-danger btn d-inline" href="@Url.Action("RimuoviPizza", "Pizza", (PizzaModel)@item)">Cancella</a>
+											<a class="btn-danger btn d-inline" href="@Url.Action("RimuoviPizza", "Pizza", (Pizza)@item)">Cancella</a>
 										</div>
 									</td>
 									<td><h3>@item.Description</h3></td>

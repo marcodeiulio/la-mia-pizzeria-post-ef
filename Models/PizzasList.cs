@@ -2,11 +2,11 @@
 {
     public class PizzasList
     {
-        public List<PizzaModel> pizzas { get; set; }
+        public List<Pizza> pizzas { get; set; }
 
         public PizzasList()
         {
-            pizzas = new List<PizzaModel>();
+            pizzas = new List<Pizza>();
         }
 
     }

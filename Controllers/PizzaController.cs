@@ -20,12 +20,12 @@ namespace la_mia_pizzeria_static.Controllers
         public static PizzasList pizze;
         public IActionResult Index()
         {
-            PizzaModel Fornarina = new PizzaModel(0,"Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
-            PizzaModel Ciociara = new PizzaModel(1,"Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
-            PizzaModel Vegetariana = new PizzaModel(2,"Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
-            PizzaModel Romana = new PizzaModel(3,"Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
-            PizzaModel Sorrentina = new PizzaModel(4,"Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
-            PizzaModel BellaNapoli = new PizzaModel(5,"Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
+            Pizza Fornarina = new Pizza(0,"Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
+            Pizza Ciociara = new Pizza(1,"Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
+            Pizza Vegetariana = new Pizza(2,"Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
+            Pizza Romana = new Pizza(3,"Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
+            Pizza Sorrentina = new Pizza(4,"Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
+            Pizza BellaNapoli = new Pizza(5,"Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
 
             pizze = new();
             pizze.pizzas.Add(Fornarina);
@@ -45,7 +45,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
         public IActionResult CreaNuovaPizza()
         {
-            PizzaModel NuovaPizza = new PizzaModel
+            Pizza NuovaPizza = new Pizza
             {
                 Id = pizze.pizzas.Count + 1,
                 Name = "",
@@ -59,7 +59,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
 
-        public IActionResult ShowPizza(PizzaModel pizza)
+        public IActionResult ShowPizza(Pizza pizza)
         {
 
             if (!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace la_mia_pizzeria_static.Controllers
                 return View("CreaNuovaPizza", pizza);
             }
 
-            PizzaModel nuovaPizza = new PizzaModel
+            Pizza nuovaPizza = new Pizza
             {
                 Id = pizza.Id,
                 Name = pizza.Name,
@@ -81,18 +81,18 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
 
-        public IActionResult AggiornaPizza(PizzaModel pizza)
+        public IActionResult AggiornaPizza(Pizza pizza)
         {
 
             return View("AggiornaPizza", pizza);
         }
 
-        public IActionResult EditPizza(PizzaModel pizza)
+        public IActionResult EditPizza(Pizza pizza)
         {
             //Pizza updatePizza = new Pizza();
             //updatePizza = (Pizza)pizze.pizzas.Where(x => x.Id == pizza.Id);
 
-            PizzaModel updatePizza = pizze.pizzas.Find(x => x.Id == pizza.Id);
+            Pizza updatePizza = pizze.pizzas.Find(x => x.Id == pizza.Id);
 
             updatePizza.Name = pizza.Name;
             updatePizza.Description = pizza.Description;
@@ -110,7 +110,7 @@ namespace la_mia_pizzeria_static.Controllers
 
 
 
-        public IActionResult RimuoviPizza(PizzaModel pizza)
+        public IActionResult RimuoviPizza(Pizza pizza)
         {
 
             return View("RimuoviPizza", pizza);
@@ -119,9 +119,9 @@ namespace la_mia_pizzeria_static.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(PizzaModel pizza)
+        public IActionResult Delete(Pizza pizza)
         {
-            PizzaModel updatePizza = pizze.pizzas.Find(x => x.Id == pizza.Id);
+            Pizza updatePizza = pizze.pizzas.Find(x => x.Id == pizza.Id);
             if (updatePizza.Id == pizza.Id)
             {
                 var ok = pizze.pizzas.Remove(updatePizza);

@@ -1,8 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace la_mia_pizzeria_static.Models
 {
-    public class PizzaModel
+    public class PizzeriaContext : DbContext
+    {
+        public DbSet<Pizza> Pizza { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PizzeriaDB;Integrated Security=True;Pooling=False");
+        }
+    }
+
+    [Table("pizza")]
+    public class Pizza
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Il nome della pizza è obbligatorio")]
@@ -13,7 +26,7 @@ namespace la_mia_pizzeria_static.Models
         public double Price { get; set; }
         public string? Photo { get; set; }
 
-        public PizzaModel(int id, string Nome, string Descizione, double Prezzo, string Foto)
+        public Pizza(int id, string Nome, string Descizione, double Prezzo, string Foto)
         {
             this.Id = id;
             this.Name = Nome;
@@ -21,7 +34,7 @@ namespace la_mia_pizzeria_static.Models
             this.Price = Prezzo;
             this.Photo = Foto;
         }
-        public PizzaModel()
+        public Pizza()
         { }
     }
 

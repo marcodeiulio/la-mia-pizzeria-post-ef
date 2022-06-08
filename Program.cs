@@ -1,3 +1,7 @@
+using la_mia_pizzeria_static.Models;
+
+public static PizzeriaContext db = new PizzeriaContext();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
