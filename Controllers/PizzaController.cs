@@ -22,12 +22,12 @@ namespace la_mia_pizzeria_static.Controllers
         public static PizzasList pizze;
         public IActionResult Index()
         {
-            Pizza Fornarina = new Pizza("Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
-            Pizza Ciociara = new Pizza("Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
-            Pizza Vegetariana = new Pizza("Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
-            Pizza Romana = new Pizza("Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
-            Pizza Sorrentina = new Pizza("Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
-            Pizza BellaNapoli = new Pizza("Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
+            Pizza Fornarina = new Pizza("[LISTA]Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
+            Pizza Ciociara = new Pizza("[LISTA]Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
+            Pizza Vegetariana = new Pizza("[LISTA]Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
+            Pizza Romana = new Pizza("[LISTA]Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
+            Pizza Sorrentina = new Pizza("[LISTA]Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
+            Pizza BellaNapoli = new Pizza("[LISTA]Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
 
             pizze = new();
             pizze.pizzas.Add(Fornarina);
