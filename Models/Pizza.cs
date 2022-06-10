@@ -1,20 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace la_mia_pizzeria_static.Models
 {
-    public class PizzeriaContext : DbContext
-    {
-        public DbSet<Pizza> Pizza { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PizzeriaDB;Integrated Security=True;Pooling=False");
-        }
-    }
-
-    [Table("pizza")]
+    [Table("Pizza")]
     public class Pizza
     {
         [Key]

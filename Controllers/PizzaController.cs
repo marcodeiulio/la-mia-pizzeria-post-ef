@@ -1,41 +1,29 @@
 ﻿using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
 
-//Ciao ragazzi, andiamo avanti con l'applicazione per gestire la nostra pizzeria.
-//Lo scopo di oggi è quello di rendere dinamici i contenuti che abbiamo come html statico nella pagina con la lista delle pizze.
-//Creiamo prima un nostro controller chiamato PizzaController e utilizziamo lui d'ora in avanti.
-//L'elenco delle pizze ora va passato come model dal controller, e la view deve utilizzarlo per mostrare l'html corretto.
-//Gestiamo anche la possibilità che non ci siano pizze nell'elenco:
-//in quel caso dobbiamo mostrare un messaggio che indichi all'utente che non ci sono pizze presenti nella nostra applicazione.
-//Ogni pizza dell'elenco avrà un pulsante che se cliccato ci porterà a una pagina che mostrerà i dettagli di quella singola pizza.
-//Dobbiamo quindi inviare l'id come parametro dell'URL, recuperarlo con la action, caricare i dati della pizza ricercata e passarli come model.
-//La view a quel punto li mostrerà all'utente con la grafica che preferiamo.
-//Ps. visto che abbiamo cambiato il controller sul quale lavoriamo, ricordiamoci di cambiare anche il "mapping di default" dei controller, altrimenti quale pagina viene caricata se richiamo l'url "/" della nostra webapp?
-
-
 namespace la_mia_pizzeria_static.Controllers
 {
     public class PizzaController : Controller
     {
+        public static PizzaContext db = new PizzaContext();
+        public static listaPizze pizze = null;
 
-        public static PizzeriaContext db = new PizzeriaContext();
-        public static PizzasList pizze;
         public IActionResult Index()
         {
-            Pizza Fornarina = new Pizza("Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50,"img/fornarina.jpg");
-            Pizza Ciociara = new Pizza("Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
-            Pizza Vegetariana = new Pizza("Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
-            Pizza Romana = new Pizza("Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
-            Pizza Sorrentina = new Pizza("Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
-            Pizza BellaNapoli = new Pizza("Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
+            //Pizza Fornarina = new Pizza("Fornarina", "Olio Evo, sale, pomodoro, rosmarino", 6.50, "img/fornarina.jpg");
+            //Pizza Ciociara = new Pizza("Ciociara", "Pomodoro, fior di latte, pancetta croccante, radicchio, pecorino", 7.50, "img/ciociara.jpg");
+            //Pizza Vegetariana = new Pizza("Vegetariana", "Pomodoro, fiordilatte, melanzane, zucchine, radicchio, pomini , rucola", 7.00, "img/vegetariana.jpg");
+            //Pizza Romana = new Pizza("Romana", "Pomodoro, fior di latte, alici di Cetara, olive taggiasche, capperi", 8.50, "img/romana.jpg");
+            //Pizza Sorrentina = new Pizza("Sorrentina", "Pomodoro, fior di latte, pomini, aglio, olive, capperi", 8.00, "img/sorrentina.jpg");
+            //Pizza BellaNapoli = new Pizza("Bella Napoli", "Pomodoro, origano, alici di Cetara, burratina", 9.50, "img/bella-napoli.jpg");
 
-            pizze = new();
-            pizze.pizzas.Add(Fornarina);
-            pizze.pizzas.Add(Ciociara);
-            pizze.pizzas.Add(Vegetariana);
-            pizze.pizzas.Add(Romana);
-            pizze.pizzas.Add(Sorrentina);
-            pizze.pizzas.Add(BellaNapoli);
+            //pizze = new();
+            //pizze.pizzas.Add(Fornarina);
+            //pizze.pizzas.Add(Ciociara);
+            //pizze.pizzas.Add(Vegetariana);
+            //pizze.pizzas.Add(Romana);
+            //pizze.pizzas.Add(Sorrentina);
+            //pizze.pizzas.Add(BellaNapoli);
 
             //db.Add(Fornarina);
             //db.Add(Ciociara);
@@ -48,24 +36,27 @@ namespace la_mia_pizzeria_static.Controllers
             return View(db);
         }
 
+        // SHOW
+        public IActionResult Show(Pizza pizza)
+        {
 
-        public IActionResult Show(int id)
-        { 
-            return View("Show", pizze.pizzas[id]);
+            return View("Show", pizza);
         }
+
+        // CREATE
         public IActionResult CreaNuovaPizza()
         {
-            Pizza NuovaPizza = new Pizza
+            Pizza NuovaPizza = new Pizza()
             {
                 Name = "",
                 Description = "",
                 Price = 0.0,
                 Photo = "",
+
             };
 
             return View(NuovaPizza);
         }
-
 
         public IActionResult ShowPizza(Pizza pizza)
         {
@@ -75,7 +66,7 @@ namespace la_mia_pizzeria_static.Controllers
                 return View("CreaNuovaPizza", pizza);
             }
 
-            Pizza nuovaPizza = new Pizza
+            Pizza nuovaPizza = new Pizza()
             {
                 Id = pizza.Id,
                 Name = pizza.Name,
@@ -84,56 +75,57 @@ namespace la_mia_pizzeria_static.Controllers
                 Photo = pizza.Photo,
 
             };
-            pizze.pizzas.Add(nuovaPizza);
+            db.Add(nuovaPizza);
+            db.SaveChanges();
             return View("ShowPizza", nuovaPizza);
         }
 
-
+        // UPDATE
         public IActionResult AggiornaPizza(Pizza pizza)
         {
 
             return View("AggiornaPizza", pizza);
         }
 
+        // EDIT
         public IActionResult EditPizza(Pizza pizza)
         {
-            //Pizza updatePizza = new Pizza();
-            //updatePizza = (Pizza)pizze.pizzas.Where(x => x.Id == pizza.Id);
+            Pizza updatePizza = new Pizza();
 
-            Pizza updatePizza = pizze.pizzas.Find(x => x.Id == pizza.Id);
-
-            updatePizza.Name = pizza.Name;
-            updatePizza.Description = pizza.Description;
-            updatePizza.Price = pizza.Price;
-            if (updatePizza.Photo != pizza.Photo)
+            if (pizza != null)
             {
-                updatePizza.Photo = pizza.Photo;
+
+                updatePizza = db.Pizzas.Find(pizza.Id);
+
+                updatePizza.Name = pizza.Name;
+                updatePizza.Description = pizza.Description;
+                updatePizza.Price = pizza.Price;
+                if (updatePizza.Photo != pizza.Photo)
+                {
+                    updatePizza.Photo = pizza.Photo;
+                }
+                db.Update(updatePizza);
+                db.SaveChanges();
             }
-
-
 
             return View("Show", updatePizza);
         }
 
-
-
-
+        // DELETE
         public IActionResult RimuoviPizza(Pizza pizza)
         {
-
             return View("RimuoviPizza", pizza);
         }
-
-
 
         [HttpPost]
         public IActionResult Delete(Pizza pizza)
         {
-            Pizza updatePizza = pizze.pizzas.Find(x => x.Id == pizza.Id);
+            Pizza updatePizza = db.Pizzas.Find(pizza.Id);
+
             if (updatePizza.Id == pizza.Id)
             {
-                var ok = pizze.pizzas.Remove(updatePizza);
-                Console.WriteLine(ok);
+                db.Remove(updatePizza);
+                db.SaveChanges();
             }
             return RedirectToAction("Index");
         }

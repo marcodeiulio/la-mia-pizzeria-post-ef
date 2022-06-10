@@ -1,10 +1,9 @@
 ﻿@{
 	Layout = null;
 	ViewData["Title"] = "Home Page";
-
 }
 
-@model la_mia_pizzeria_static.Models.PizzeriaContext
+@model la_mia_pizzeria_static.Models.PizzaContext
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +12,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"]</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
 	<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 </head>
 <body>
@@ -33,11 +31,11 @@
 				  </thead>
 				  <tbody>
 					  @{
-							foreach (var item in Model.Pizza)
+							foreach (var item in Model.Pizzas)
 							{
 								<tr>
 								<th scope="row">
-									<h3><a class="link-success" href="@Url.Action("Show", "Pizza", new {@item.Id})">@item.Name</a></h3>
+									<h3><a class="link-success" href="@Url.Action("Show", "Pizza", @item)">@item.Name</a></h3>
 									<div class="my-3">
 										<a class="btn-info btn d-inline" href="@Url.Action("AggiornaPizza", "Pizza", @item)">Aggiorna Pizza</a>
 									</div>
