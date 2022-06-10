@@ -4,28 +4,25 @@
 	<form method="post" action="@Url.Action("ShowPizza", "Pizza")">
 		@Html.AntiForgeryToken()
 		<div class="mb-3">
-			<strong>Id:</strong>
-			<input asp-for="Id">
-		</div>
-		<div class="mb-3">
-			<strong>Nome:</strong>
-			<input asp-for="Name" >
+			<label for="name" class="form-label">Nome</label>
+			<input class="form-control" id="name" asp-for="Name">
 			<span asp-validation-for="Name" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<strong >Descrizione:</strong>
-			<input asp-for="Description">
+			<label for="Description" class="form-label">Ingredienti</label>
+			<input class="form-control" id="Description" asp-for="Description">
 			<span asp-validation-for="Description" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<strong >Prezzo:</strong>
-			<input asp-for="Price">
+			<label for="Price" class="form-label">Prezzo</label>
+			<input type="number" class="form-control" id="Price" asp-for="Price">
 			<span asp-validation-for="Price" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<strong>Foto:</strong>
-			<input asp-for="Photo">
+			<label for="Photo" class="form-label">Foto (bella, mi raccomando)</label>
+			<input class="form-control" id="Photo" asp-for="Photo">
+			<span asp-validation-for="Photo" class="text-danger"></span>
 		</div>
-		<button class="btn-primary btn" type="submit">Conferma</button>
+		<button class="btn-primary btn" type="submit">Aggiungi la tua creatura al menu</button>
 	</form>
 </div>

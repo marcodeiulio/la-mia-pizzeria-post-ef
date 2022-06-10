@@ -52,7 +52,6 @@ namespace la_mia_pizzeria_static.Controllers
                 Description = "",
                 Price = 0.0,
                 Photo = "",
-
             };
 
             return View(NuovaPizza);

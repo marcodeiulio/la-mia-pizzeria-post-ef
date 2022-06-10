@@ -11,23 +11,17 @@
 	<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 </head>
 <body>
-	<header>
-		
-	</header>
-	<div class="container">
-		<main role="main" class="pb-3">
-			<div class="text-center">
-				<h1 class="display-4 pb-5">La pizza @Model.Name</h1>
-				<div class="row">
-					<div class="offset-4 col-4">
-						<div>Pizza @Model.Name</div>
-						<div><img src="@Model.Photo"></img></div>
-						<div>@Model.Description</div>
-						<div>Prezzo : @Model.Price $</div>
-					</div>
-					<div>
-						<a href="@Url.Action("Index", "Pizza")" style="width:150px" class="btn btn-primary">Torna alla Lista</a>
-					</div>
+	<div class="container mt-3">
+		<main class="pb-3 d-flex justify-content-center">
+			<div class="card text-center" style="width: 18rem;">
+			  <img src="/@Model.Photo" class="card-img-top" alt="@Model.Name">
+			  <div class="card-body">
+					<h5 class="card-title">@Model.Name</h5>
+					<p class="card-text">@Model.Description</p>
+					<h6 class="card-title">€@Model.Price</h5>
+					<a href="@Url.Action("AggiornaPizza", "Pizza", @Model)" class="btn btn-info">Aggiorna Pizza</a>
+					<a href="@Url.Action("RimuoviPizza", "Pizza", @Model)" class="btn btn-danger my-2">Cancella Pizza</a>
+					<a href="@Url.Action("Index", "Pizza")" class="btn btn-outline-success"><h6>Torna alle pizze</h6></a>
 				</div>
 			</div>
 		</main>
